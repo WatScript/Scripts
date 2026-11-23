@@ -8,13 +8,26 @@ local HUB_NAME = "WatHUB"
 local VERSION = "v1.0"
 
 local SCRIPTS_BY_PLACE_ID = {
-	[120078531045807] = {
+	[84882418635353] = {
 		Name = "Malam Sama Ayam",
 		Url = "https://raw.githubusercontent.com/WatScript/Scripts/refs/heads/main/MalamSamaRembo.lua",
+	},
+	[72594159905471] = {
+		Name = "Malam Sama Ayam - Chapter 2",
+		Url = "https://raw.githubusercontent.com/WatScript/Scripts/refs/heads/main/MalamSamaRemboCh2.lua",
 	},
 	[99066225512279] = {
 		Name = "Name Them All",
 		Url = "https://raw.githubusercontent.com/WatScript/Scripts/refs/heads/main/SebutkanSemuaNama.lua",
+	},
+}
+
+-- Letakkan PlaceId lobby di sini (pastikan PlaceId yang sama tidak berada di SCRIPTS_BY_PLACE_ID)
+local LOBBY_MESSAGES_BY_PLACE_ID = {
+	[120078531045807] = {
+		Status = "Lobby",
+		Color = "#FFD43B",
+		Message = '<font color="#FFFFFF">Silakan masuk ke bus dahulu untuk memulakannya.</font>',
 	},
 }
 
@@ -183,11 +196,56 @@ end
 
 local placeId = game.PlaceId
 local entry = SCRIPTS_BY_PLACE_ID[placeId]
+local lobbyInfo = LOBBY_MESSAGES_BY_PLACE_ID[placeId]
 local playerName = Players.LocalPlayer and Players.LocalPlayer.Name or "Player"
 
 print(string.format("[%s %s] Memeriksa PlaceId: %s | Pengguna: %s", HUB_NAME, VERSION, tostring(placeId), playerName))
 
-if not entry then
+if entry then
+	local supportMsg = string.format(
+		'<font color="#FFFFFF">Map disokong! Script </font><font color="#FFD43B">%s</font><font color="#FFFFFF"> sedang dimuatkan...</font>',
+		entry.Name
+	)
+	showCustomNotify("Support", "#2ECC71", supportMsg, 2.8)
+
+	local fetchOk, sourceCode = pcall(function()
+		return game:HttpGet(entry.Url)
+	end)
+
+	if not fetchOk or type(sourceCode) ~= "string" or sourceCode == "" then
+		warn(string.format("[%s] Gagal memuatkan skrip %s: %s", HUB_NAME, entry.Name, tostring(sourceCode)))
+		local errMsg = string.format(
+			'<font color="#FFFFFF">Gagal memuatkan script </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
+			entry.Name
+		)
+		showCustomNotify("Error", "#FF3B30", errMsg, 3.5)
+		return
+	end
+
+	local fn, compileErr = loadstring(sourceCode)
+	if not fn then
+		warn(string.format("[%s] Ralat sintaks pada %s: %s", HUB_NAME, entry.Name, tostring(compileErr)))
+		local synMsg = string.format(
+			'<font color="#FFFFFF">Ralat sintaks pada script </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
+			entry.Name
+		)
+		showCustomNotify("Syntax Error", "#FF3B30", synMsg, 3.5)
+		return
+	end
+
+	local runOk, runErr = pcall(fn)
+	if not runOk then
+		warn(string.format("[%s] Ralat semasa menjalankan %s: %s", HUB_NAME, entry.Name, tostring(runErr)))
+		local runMsg = string.format(
+			'<font color="#FFFFFF">Ralat semasa menjalankan </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
+			entry.Name
+		)
+		showCustomNotify("Runtime Error", "#FF3B30", runMsg, 3.5)
+	end
+elseif lobbyInfo then
+	showCustomNotify(lobbyInfo.Status, lobbyInfo.Color, lobbyInfo.Message, 4)
+	return
+else
 	local currentGameName = getCurrentGameName(placeId)
 	warn(string.format("[%s] Map tidak disokong: %s (PlaceId: %s)", HUB_NAME, currentGameName, tostring(placeId)))
 
@@ -198,45 +256,4 @@ if not entry then
 
 	showCustomNotify("Unsupported", "#FF3B30", msg, 3.5)
 	return
-end
-
-local supportMsg = string.format(
-	'<font color="#FFFFFF">Map disokong! Script </font><font color="#FFD43B">%s</font><font color="#FFFFFF"> sedang dimuatkan...</font>',
-	entry.Name
-)
-showCustomNotify("Support", "#2ECC71", supportMsg, 2.8)
-
-local fetchOk, sourceCode = pcall(function()
-	return game:HttpGet(entry.Url)
-end)
-
-if not fetchOk or type(sourceCode) ~= "string" or sourceCode == "" then
-	warn(string.format("[%s] Gagal memuatkan skrip %s: %s", HUB_NAME, entry.Name, tostring(sourceCode)))
-	local errMsg = string.format(
-		'<font color="#FFFFFF">Gagal memuatkan script </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
-		entry.Name
-	)
-	showCustomNotify("Error", "#FF3B30", errMsg, 3.5)
-	return
-end
-
-local fn, compileErr = loadstring(sourceCode)
-if not fn then
-	warn(string.format("[%s] Ralat sintaks pada %s: %s", HUB_NAME, entry.Name, tostring(compileErr)))
-	local synMsg = string.format(
-		'<font color="#FFFFFF">Ralat sintaks pada script </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
-		entry.Name
-	)
-	showCustomNotify("Syntax Error", "#FF3B30", synMsg, 3.5)
-	return
-end
-
-local runOk, runErr = pcall(fn)
-if not runOk then
-	warn(string.format("[%s] Ralat semasa menjalankan %s: %s", HUB_NAME, entry.Name, tostring(runErr)))
-	local runMsg = string.format(
-		'<font color="#FFFFFF">Ralat semasa menjalankan </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
-		entry.Name
-	)
-	showCustomNotify("Runtime Error", "#FF3B30", runMsg, 3.5)
 end
