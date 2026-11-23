@@ -132,7 +132,7 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 	descLabel.TextSize = 13
 	descLabel.TextWrapped = true
 	descLabel.TextXAlignment = Enum.TextXAlignment.Left
-	descLabel.TextYAlignment = Enum.TextTop
+	descLabel.TextYAlignment = Enum.TextYAlignment.Top
 	descLabel.RichText = true
 	descLabel.Text = bodyRichText
 	descLabel.Parent = card
