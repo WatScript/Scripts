@@ -60,7 +60,7 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 			StarterGui:SetCore("SendNotification", {
 				Title = HUB_NAME .. " | " .. statusLabel,
 				Text = bodyRichText:gsub("<[^>]+>", ""),
-				Duration = duration or 5,
+				Duration = duration or 3,
 			})
 		end)
 		return
@@ -70,6 +70,11 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 	if oldGui then
 		oldGui:Destroy()
 	end
+
+	local cardWidth = 310
+	local cardHeight = 64
+	local topMargin = 14
+	local rightMargin = 14
 
 	local screenGui = Instance.new("ScreenGui")
 	screenGui.Name = "WatHUB_CustomNotify"
@@ -81,19 +86,19 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 	local card = Instance.new("Frame")
 	card.Name = "Card"
 	card.AnchorPoint = Vector2.new(1, 0)
-	card.Position = UDim2.new(1, 360, 0, 18)
-	card.Size = UDim2.new(0, 330, 0, 92)
+	card.Position = UDim2.new(1, cardWidth + 30, 0, topMargin)
+	card.Size = UDim2.new(0, cardWidth, 0, cardHeight)
 	card.BackgroundColor3 = Color3.fromRGB(16, 18, 24)
 	card.BackgroundTransparency = 0.14
 	card.BorderSizePixel = 0
 	card.Parent = screenGui
 
 	local corner = Instance.new("UICorner")
-	corner.CornerRadius = UDim.new(0, 10)
+	corner.CornerRadius = UDim.new(0, 9)
 	corner.Parent = card
 
 	local stroke = Instance.new("UIStroke")
-	stroke.Thickness = 2
+	stroke.Thickness = 1.8
 	stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 	stroke.Color = Color3.fromRGB(255, 255, 255)
 	stroke.Parent = card
@@ -111,10 +116,10 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 
 	local titleLabel = Instance.new("TextLabel")
 	titleLabel.BackgroundTransparency = 1
-	titleLabel.Position = UDim2.new(0, 12, 0, 8)
-	titleLabel.Size = UDim2.new(1, -24, 0, 22)
+	titleLabel.Position = UDim2.new(0, 10, 0, 6)
+	titleLabel.Size = UDim2.new(1, -20, 0, 18)
 	titleLabel.Font = Enum.Font.GothamBold
-	titleLabel.TextSize = 14
+	titleLabel.TextSize = 13
 	titleLabel.TextXAlignment = Enum.TextXAlignment.Left
 	titleLabel.RichText = true
 	titleLabel.Text = string.format(
@@ -126,10 +131,10 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 
 	local descLabel = Instance.new("TextLabel")
 	descLabel.BackgroundTransparency = 1
-	descLabel.Position = UDim2.new(0, 12, 0, 32)
-	descLabel.Size = UDim2.new(1, -24, 1, -40)
+	descLabel.Position = UDim2.new(0, 10, 0, 25)
+	descLabel.Size = UDim2.new(1, -20, 1, -30)
 	descLabel.Font = Enum.Font.Gotham
-	descLabel.TextSize = 13
+	descLabel.TextSize = 12
 	descLabel.TextWrapped = true
 	descLabel.TextXAlignment = Enum.TextXAlignment.Left
 	descLabel.TextYAlignment = Enum.TextYAlignment.Top
@@ -145,17 +150,17 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 			end
 			return
 		end
-		rainbowGrad.Rotation = (rainbowGrad.Rotation + dt * 110) % 360
+		rainbowGrad.Rotation = (rainbowGrad.Rotation + dt * 120) % 360
 	end)
 
 	local slideIn = TweenService:Create(
 		card,
-		TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-		{ Position = UDim2.new(1, -18, 0, 18) }
+		TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+		{ Position = UDim2.new(1, -rightMargin, 0, topMargin) }
 	)
 	slideIn:Play()
 
-	task.delay(duration or 5.5, function()
+	task.delay(duration or 3, function()
 		if rotConn then
 			rotConn:Disconnect()
 		end
@@ -164,8 +169,8 @@ local function showCustomNotify(statusLabel, statusColorHex, bodyRichText, durat
 		end
 		local slideOut = TweenService:Create(
 			card,
-			TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
-			{ Position = UDim2.new(1, 360, 0, 18) }
+			TweenInfo.new(0.22, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
+			{ Position = UDim2.new(1, cardWidth + 30, 0, topMargin) }
 		)
 		slideOut:Play()
 		slideOut.Completed:Connect(function()
@@ -187,19 +192,19 @@ if not entry then
 	warn(string.format("[%s] Map tidak disokong: %s (PlaceId: %s)", HUB_NAME, currentGameName, tostring(placeId)))
 
 	local msg = string.format(
-		'<font color="#FFFFFF">Maaf, </font><font color="#2ECC71">W</font><font color="#FFFFFF">at</font><font color="#FF8C1A">HUB</font><font color="#FFFFFF"> masih belum buat script untuk game: </font><font color="#FFD43B">%s</font>',
+		'<font color="#FFFFFF">Maaf, </font><font color="#2ECC71">W</font><font color="#FFFFFF">at</font><font color="#FF8C1A">HUB</font><font color="#FFFFFF"> belum buat script untuk </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
 		currentGameName
 	)
 
-	showCustomNotify("Unsupported", "#FF3B30", msg, 6.5)
+	showCustomNotify("Unsupported", "#FF3B30", msg, 3.5)
 	return
 end
 
 local supportMsg = string.format(
-	'<font color="#FFFFFF">Mantap, map disokong! Script untuk game: </font><font color="#FFD43B">%s</font><font color="#FFFFFF"> sedang dimuatkan...</font>',
+	'<font color="#FFFFFF">Map disokong! Script </font><font color="#FFD43B">%s</font><font color="#FFFFFF"> sedang dimuatkan...</font>',
 	entry.Name
 )
-showCustomNotify("Support", "#2ECC71", supportMsg, 4)
+showCustomNotify("Support", "#2ECC71", supportMsg, 2.8)
 
 local fetchOk, sourceCode = pcall(function()
 	return game:HttpGet(entry.Url)
@@ -208,10 +213,10 @@ end)
 if not fetchOk or type(sourceCode) ~= "string" or sourceCode == "" then
 	warn(string.format("[%s] Gagal memuatkan skrip %s: %s", HUB_NAME, entry.Name, tostring(sourceCode)))
 	local errMsg = string.format(
-		'<font color="#FFFFFF">Maaf, gagal memuatkan script untuk game: </font><font color="#FFD43B">%s</font>',
+		'<font color="#FFFFFF">Gagal memuatkan script </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
 		entry.Name
 	)
-	showCustomNotify("Error", "#FF3B30", errMsg, 6)
+	showCustomNotify("Error", "#FF3B30", errMsg, 3.5)
 	return
 end
 
@@ -219,10 +224,10 @@ local fn, compileErr = loadstring(sourceCode)
 if not fn then
 	warn(string.format("[%s] Ralat sintaks pada %s: %s", HUB_NAME, entry.Name, tostring(compileErr)))
 	local synMsg = string.format(
-		'<font color="#FFFFFF">Maaf, terdapat ralat pada script untuk game: </font><font color="#FFD43B">%s</font>',
+		'<font color="#FFFFFF">Ralat sintaks pada script </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
 		entry.Name
 	)
-	showCustomNotify("Syntax Error", "#FF3B30", synMsg, 6)
+	showCustomNotify("Syntax Error", "#FF3B30", synMsg, 3.5)
 	return
 end
 
@@ -230,8 +235,8 @@ local runOk, runErr = pcall(fn)
 if not runOk then
 	warn(string.format("[%s] Ralat semasa menjalankan %s: %s", HUB_NAME, entry.Name, tostring(runErr)))
 	local runMsg = string.format(
-		'<font color="#FFFFFF">Maaf, script mengalami masalah semasa dijalankan untuk game: </font><font color="#FFD43B">%s</font>',
+		'<font color="#FFFFFF">Ralat semasa menjalankan </font><font color="#FFD43B">%s</font><font color="#FFFFFF">.</font>',
 		entry.Name
 	)
-	showCustomNotify("Runtime Error", "#FF3B30", runMsg, 6)
+	showCustomNotify("Runtime Error", "#FF3B30", runMsg, 3.5)
 end
