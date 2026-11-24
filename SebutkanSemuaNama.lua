@@ -25,15 +25,15 @@ local KEY_SAVE_FILE = "WatHUB_VIP_LockData.json"
 
 -- Masukkan username atau UserId Owner di sini agar otomatis akses WatVIP tanpa Key
 local OWNER_USERNAMES = {
-    ["watashid_official"] = true,
+   -- [""] = true,
 }
 
 local OWNER_USER_IDS = {
-    -- [123456789] = true,
+     [7409549979] = true,
 }
 
 -- ==========================================
--- KONFIGURASI JSONBIN (ONLINE KEY VERIFY - SELAMAT)
+-- KONFIGURASI KEY
 -- ==========================================
 local JSONBIN_BIN_ID = "6b0569f2ac6210605aa038d7"
 local JSONBIN_ACCESS_KEY = "$2a$10$gcwVGT55vVX6ORY8uptCo.DEUGi4wEOgmPPv9c.1PBVc2mBeXv1wC"
@@ -207,7 +207,7 @@ local function activate_vip_key_for_current_user(input_key)
 end
 
 -- ==========================================
--- WORDBANK (TERMASUK KATEGORI BARU DARI GAMBAR & VIDEO)
+-- WORDBANK (KATEGORI DAN JAWAPAN TERBAIK)
 -- ==========================================
 local WordBank = {
     ["Makhluk Fiksi"] = {"Naga", "Phoenix", "Unicorn", "Griffin", "Pegasus", "Minotaur", "Kraken", "Leviathan", "Hydra", "Cerberus", "Basilisk", "Vampir", "Werewolf", "Medusa", "Centaur", "Banshee", "Golem", "Elf", "Kurcaci", "Putri Duyung", "Peri", "Genie", "Yeti", "Bigfoot", "Drakula", "Zombie", "Momok", "Hantu", "Siluman", "Troll", "Goblin", "Ogre", "Manticore", "Chimera", "Sphinx", "Cyclops", "Titan", "Nymph", "Satyr", "Fenrir", "Jinn", "Ifrit", "Ghoul", "Lich", "Siren", "Harpy", "Kelpie", "Wyvern", "Drake", "Lamia"},
