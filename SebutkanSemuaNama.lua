@@ -413,7 +413,7 @@ local function activate_vip_key_for_current_user(input_key)
         local same_account = (locked_name == uname) or (uid > 0 and locked_id == uid)
 
         if not same_account then
-            return false, "1 Key 1 akun sahaja!"
+            return false, "Tidak bisa menggunakan key yang sama bro!"
         end
 
         MemoryLockStore.bindings[clean_key] = uname
@@ -428,7 +428,7 @@ local function activate_vip_key_for_current_user(input_key)
             local locked_name = string.lower(tostring(claimed_row.roblox_username or ""))
             local locked_id = tonumber(claimed_row.user_id) or 0
             if locked_name ~= uname and not (uid > 0 and locked_id == uid) then
-                return false, "1 Key 1 akun sahaja!"
+                return false, "Tidak bisa menggunakan key yang sama bro!"
             end
         end
         local err_detail = ""
