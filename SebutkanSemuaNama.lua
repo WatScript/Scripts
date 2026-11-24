@@ -1,5 +1,5 @@
--- Language: Luau | File: WatHUB_AutoAnswer.lua | Target: Roblox Client (Luau)
--- FULL LUA: 10 Random VIP Keys, 1 Key = 1 Account Lock + Notice, Persistent Save Across Re-Execute, Owner Auto-VIP, Tab Colors & Compact Info Layout
+-- Language: Luau | File: SebutkanSemuaNama.lua | Target: Roblox Client (Luau)
+-- FULL LUA: Random VIP Keys, 1 Key = 1 Account Lock + Notice, Persistent Save Across Re-Execute, Owner Auto-VIP, Tab Colors & Compact Info Layout
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
