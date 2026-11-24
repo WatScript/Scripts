@@ -22,7 +22,7 @@ local DISCORD_INVITE_URL = "https://discord.gg/dcXzTxqmD"
 
 local CUSTOM_LOGO_ASSET_ID = 117209290368597 -- Versi 2: Logo custom
 local ACTIVE_ICON_VERSION = 2 -- 1 = Teks 'W' hijau, 2 = Logo custom (default)
-local SPEED_VALUE = 32 -- Kelajuan lari bila Speed aktif (boleh laras, contoh 30-38)
+local SPEED_VALUE = 27 -- Kelajuan lari bila Speed aktif (boleh laras, contoh 30-38)
 local ICON_DRAG_THRESHOLD = 12 -- Jarak minimum (px) sebelum ikon terapung dianggap digeser
 
 local function copy_to_clipboard(txt)
