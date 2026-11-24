@@ -19,7 +19,7 @@ if old_gui then old_gui:Destroy() end
 -- ==========================================
 -- KONFIGURASI OWNER, LINK DISCORD & 10 KEY RANDOM
 -- ==========================================
-local DISCORD_INVITE_LINK = "https://discord.gg/CONTOH_LINK"
+local DISCORD_INVITE_LINK = "https://discord.gg/2KcdMhwy2"
 local WATFREE_MAX_WORDS = 10
 local KEY_SAVE_FILE = "WatHUB_VIP_LockData.json"
 
