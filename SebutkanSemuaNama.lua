@@ -32,18 +32,18 @@ local OWNER_USER_IDS = {
     -- [123456789] = true,
 }
 
--- 10 Key random susah ditebak (1 Key = Lock 1 username)
+-- Key
 local GENERATED_VIP_KEYS = {
     --"",
-    "WVIP-3T8N-R5V9-42HZ",
-    "WVIP-7B2C-M6Y4-91DF",
-    "WVIP-5K9L-X3W8-64JR",
-    "WVIP-8P4G-Q2H7-19VB",
-    "WVIP-2Z6D-N9J5-73TM",
-    "WVIP-6F3S-V8C4-57KW",
-    "WVIP-4R7Y-B2L9-85GX",
-    "WVIP-9H5J-T4K6-31NP",
-    "WVIP-1W8M-G7Z3-60LQ",
+--    "WVIP-3T8N-R5V9-42HZ",
+--    "WVIP-7B2C-M6Y4-91DF",
+--    "WVIP-5K9L-X3W8-64JR",
+--    "WVIP-8P4G-Q2H7-19VB",
+--    "WVIP-2Z6D-N9J5-73TM",
+ --   "WVIP-6F3S-V8C4-57KW",
+ --   "WVIP-4R7Y-B2L9-85GX",
+--    "WVIP-9H5J-T4K6-31NP",
+  --  "WVIP-1W8M-G7Z3-60LQ",
 }
 
 local USER_ICON_ASSET = "rbxassetid://117209290368597"
