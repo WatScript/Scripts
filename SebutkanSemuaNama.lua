@@ -34,7 +34,7 @@ local OWNER_USER_IDS = {
 
 -- 10 Key random susah ditebak (1 Key = Lock 1 username)
 local GENERATED_VIP_KEYS = {
- --   "",
+    "WVIP-9X4M-K7Q2-88PL",
     "WVIP-3T8N-R5V9-42HZ",
     "WVIP-7B2C-M6Y4-91DF",
     "WVIP-5K9L-X3W8-64JR",
