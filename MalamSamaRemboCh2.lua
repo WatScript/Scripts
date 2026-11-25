@@ -20,7 +20,7 @@ pcall(function()
     end
 end)
 
-local DISCORD_INVITE_URL = "https://discord.gg/dcXzTxqmD"
+local DISCORD_INVITE_URL = "https://discord.gg/nb8Jq8EKDG"
 
 local CUSTOM_LOGO_ASSET_ID = 117209290368597
 local ACTIVE_ICON_VERSION = 2
