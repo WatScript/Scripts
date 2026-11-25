@@ -18,7 +18,7 @@ pcall(function()
     end
 end)
 
-local DISCORD_INVITE_URL = "https://discord.gg/dcXzTxqmD"
+local DISCORD_INVITE_URL = "https://discord.gg/nb8Jq8EKDG"
 
 local CUSTOM_LOGO_ASSET_ID = 117209290368597 -- Versi 2: Logo custom
 local ACTIVE_ICON_VERSION = 2 -- 1 = Teks 'W' hijau, 2 = Logo custom (default)
