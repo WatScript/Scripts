@@ -2775,7 +2775,7 @@ local function build_wathub()
         add_info_card(
             page,
             "Info Noclip",
-            "Untuk noclip lebih lancar, lakukan lompatan sambil menembusi sesuatu.",
+            "- WatHUB -",
             step(),
             52,
             false,
