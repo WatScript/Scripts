@@ -36,7 +36,7 @@ local LOBBY_MESSAGES_BY_PLACE_ID = {
 	[91246277860636] = {
 		Status = "Lobby",
 		Color = "#FFD43B",
-		Message = '<font color="#FFFFFF">Silakan masuk ke match dahulu untuk memulakannya.</font>',
+		Message = '<font color="#FFFFFF">Silakan masuk ke bus dahulu untuk memulakannya.</font>',
 	},
 }
 
